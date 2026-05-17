@@ -581,7 +581,21 @@ class MatchingEngine:
             elif "자율" in hs_type:
                 type_bonus = 3
 
-            final_score = min(100, coverage_score + type_bonus)
+            # 근거리 보너스 (동 정보로 주소 매칭)
+            proximity_bonus = 0
+            school_address = str(school.get("ORG_RDNMA", ""))
+            region_parts = region.split() if region else []
+            if len(region_parts) >= 3:
+                dong_name = region_parts[2]
+                if dong_name in school_address:
+                    proximity_bonus = 8
+                elif len(region_parts) >= 2 and region_parts[1] in school_address:
+                    proximity_bonus = 3
+            elif len(region_parts) >= 2:
+                if region_parts[1] in school_address:
+                    proximity_bonus = 3
+
+            final_score = min(100, coverage_score + type_bonus + proximity_bonus)
 
             school_scores.append({
                 "schoolCode": school_code,

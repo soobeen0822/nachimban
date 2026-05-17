@@ -39,11 +39,12 @@ export default function AdditionalInfoPage({ profile, setProfile }: Props) {
   const navigate = useNavigate();
   const [sido, setSido] = useState('');
   const [sigungu, setSigungu] = useState('');
+  const [dong, setDong] = useState('');
   const [grade, setGrade] = useState('');
   const [gender, setGender] = useState('');
 
   const handleSubmit = () => {
-    const region = sigungu ? `${sido} ${sigungu}` : sido;
+    const region = [sido, sigungu, dong].filter(Boolean).join(' ');
     setProfile({ ...profile, region, grade, gender } as any);
     navigate('/result');
   };
@@ -96,6 +97,22 @@ export default function AdditionalInfoPage({ profile, setProfile }: Props) {
                   <option key={s} value={s}>{s}</option>
                 ))}
               </select>
+            </div>
+          )}
+
+          {sigungu && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                읍/면/동 (선택)
+              </label>
+              <input
+                type="text"
+                placeholder="예: 정자동, 수내동"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                value={dong}
+                onChange={(e) => setDong(e.target.value)}
+              />
+              <p className="text-xs text-gray-400 mt-1">입력하면 더 가까운 학교를 우선 추천합니다</p>
             </div>
           )}
 
