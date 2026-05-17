@@ -49,12 +49,12 @@
 
 ### 3.1 데이터 소스 및 수집 현황
 
-| # | 데이터명 | 출처 | 수집 방법 | 건수 |
-|---|---------|------|----------|------|
-| 1 | 전국 고등학교 기본정보 | 나이스(NEIS) 교육정보 개방 포털 | REST API | 2,407개 학교 |
-| 2 | 고등학교별 개설 교과목 | 나이스(NEIS) 시간표 API | REST API | 161,317건 (2,307개 학교) |
-| 3 | 직업 상세정보 | 워크넷(work24) 직업정보 API | REST API | 462개 직업 |
-| 4 | 직업별 능력/지식 점수 | 워크넷(work24) 직업정보 API | REST API | 462개 직업 × 35개 능력 |
+| # | 데이터명 | 출처 | 수집 방법 | 건수 | URL |
+|---|---------|------|----------|------|-----|
+| 1 | 전국 고등학교 기본정보 | 나이스(NEIS) 교육정보 개방 포털 | REST API | 2,407개 학교 | https://open.neis.go.kr/hub/schoolInfo |
+| 2 | 고등학교별 개설 교과목 | 나이스(NEIS) 시간표 API | REST API | 161,317건 (2,307개 학교) | https://open.neis.go.kr/hub/hisTimetable |
+| 3 | 직업 상세정보 | 워크넷(work24) 직업정보 API | REST API | 462개 직업 | https://www.work24.go.kr/cm/openApi/call/wk/callOpenApiSvcInfo212L01.do |
+| 4 | 직업별 능력/지식 점수 | 워크넷(work24) 직업정보 API | REST API | 462개 직업 × 35개 능력 | https://www.work24.go.kr/cm/openApi/call/wk/callOpenApiSvcInfo212L01.do |
 
 ### 3.2 데이터 가공
 
