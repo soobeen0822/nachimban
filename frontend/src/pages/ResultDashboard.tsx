@@ -132,21 +132,50 @@ export default function ResultDashboard({ profile }: Props) {
 
         {/* 종합 의견 */}
         <div className="bg-gradient-to-r from-blue-50 to-emerald-50 rounded-2xl p-6 border border-blue-100">
-          <h2 className="text-lg font-bold text-gray-900 mb-3">📋 종합 의견</h2>
-          <p className="text-gray-700 leading-relaxed">
-            분석 결과, <span className="font-semibold text-blue-700">{careerRecommendations[0]?.career}</span> 분야가
-            가장 높은 적합도({careerRecommendations[0]?.matchScore}%)를 보였습니다.
-            {goalComparison && (
-              <> 입력하신 목표와의 매칭도는 <span className="font-semibold text-emerald-700">{goalComparison.matchScore}%({goalComparison.verdict})</span>입니다. </>
-            )}
-            추천 학과는 <span className="font-semibold">{careerRecommendations[0]?.relatedMajors.slice(0, 2).join(', ')}</span> 계열이며,
-            거주지 인근 <span className="font-semibold">{visibleSchools[0]?.name}</span> 등에서 관련 교과목을 이수할 수 있습니다.
-          </p>
-          {goalComparison && !goalComparison.improvements.length && (
-            <p className="text-emerald-600 text-sm mt-2 font-medium">
-              ✨ 적성과 목표가 잘 맞으니, 자신감을 가지고 준비하세요!
-            </p>
-          )}
+          <h2 className="text-lg font-bold text-gray-900 mb-4">📋 종합 의견</h2>
+          <div className="space-y-3">
+            {/* 1. 매칭 적합도 */}
+            <div className="flex gap-3">
+              <span className="text-blue-600 font-bold text-sm mt-0.5 shrink-0">①</span>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                {goalComparison ? (
+                  <>
+                    목표 직업 <span className="font-semibold text-blue-700">'{profile.goal?.targetJob}'</span>과의 매칭 적합도는{' '}
+                    <span className="font-semibold text-blue-700">{goalComparison.matchScore}%</span>로{' '}
+                    <span className="font-semibold">{goalComparison.verdict}</span> 수준입니다.
+                  </>
+                ) : (
+                  <>
+                    AI 분석 기반 최적 직업은{' '}
+                    <span className="font-semibold text-blue-700">{careerRecommendations[0]?.career}</span>이며,
+                    적합도는 <span className="font-semibold text-blue-700">{careerRecommendations[0]?.matchScore}%</span>입니다.
+                  </>
+                )}
+              </p>
+            </div>
+            {/* 2. 추천 학과 */}
+            <div className="flex gap-3">
+              <span className="text-blue-600 font-bold text-sm mt-0.5 shrink-0">②</span>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                추천 학과는{' '}
+                <span className="font-semibold">
+                  {careerRecommendations[0]?.relatedMajors.slice(0, 3).join(', ')}
+                </span>{' '}
+                계열입니다.
+              </p>
+            </div>
+            {/* 3. 거주지 인근 추천 학교 */}
+            <div className="flex gap-3">
+              <span className="text-blue-600 font-bold text-sm mt-0.5 shrink-0">③</span>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                거주지 인근 추천 학교는{' '}
+                <span className="font-semibold">
+                  {visibleSchools.slice(0, 3).map((s) => s.name).join(', ')}
+                </span>{' '}
+                입니다.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* 섹션 1: 프로필 시각화 */}
